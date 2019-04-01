@@ -22,6 +22,8 @@ public class Patient implements Serializable {
     @PrimaryKey
     private Integer patientId;
 
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
 }

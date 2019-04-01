@@ -25,6 +25,5 @@ public class ScheduleController {
     public List<Clinic> getSchedules(ScheduleFilter filter) {
         return service.getSchedules(filter);
     }
-    ***/
-
+***/
 }

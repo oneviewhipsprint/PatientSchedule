@@ -1,12 +1,12 @@
-insert into patient (patientid,firstname,lastname) values (1, 'Gerry', 'Garcia');
-insert into patient (patientid,firstname,lastname) values (2, 'Jim', 'Morrison');
-insert into patient (patientid,firstname,lastname) values (3, 'Janis', 'Joplin');
-insert into patient (patientid,firstname,lastname) values (4, 'Jimi', 'Hendrix');
-insert into patient (patientid,firstname,lastname) values (5, 'Kurt', 'Cobain');
-insert into patient (patientid,firstname,lastname) values (6, 'John', 'Lennon');
-insert into patient (patientid,firstname,lastname) values (7, 'Freddy', 'Mercury');
-insert into patient (patientid,firstname,lastname) values (8, 'Bob', 'Marley');
-insert into patient (patientid,firstname,lastname) values (9, 'Stevie Ray', 'Vaughn');
+insert into patient (patientid,username,password, firstname,lastname) values (1, 'gerrygarcia','davita', 'Gerry', 'Garcia');
+insert into patient (patientid,username,password,firstname,lastname) values (2, 'jimmorrison','davita','Jim', 'Morrison');
+insert into patient (patientid,username,password,firstname,lastname) values (3, 'janisjoplin', 'davita', 'Janis', 'Joplin');
+insert into patient (patientid,username,password,firstname,lastname) values (4, 'jimihendrix', 'davita', 'Jimi', 'Hendrix');
+insert into patient (patientid,username,password,firstname,lastname) values (5, 'kurtcobain','davita', 'Kurt', 'Cobain');
+insert into patient (patientid,username,password,firstname,lastname) values (6, 'johnlennon', 'davita',  'John', 'Lennon');
+insert into patient (patientid,username,password,firstname,lastname) values (7, 'freddymercury','davita', 'Freddy', 'Mercury');
+insert into patient (patientid,username,password,firstname,lastname) values (8, 'bobmarley','davita', 'Bob', 'Marley');
+insert into patient (patientid,username,password,firstname,lastname) values (9, 'stevierayvaughn','davita', 'Stevie Ray', 'Vaughn');
 
 
 insert into clinic(clinicid,clinicName) values(1, 'DenverWest');
