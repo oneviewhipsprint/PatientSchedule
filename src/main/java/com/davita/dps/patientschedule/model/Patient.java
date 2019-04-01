@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("clinic")
+@Table("patient")
 public class Patient implements Serializable {
     private static final long serialVersionUID = -2936461577864383376L;
 

@@ -14,5 +14,12 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   data:
     cassandra:
+      contact-points: 127.0.0.1
+      port: 9042
       keyspace-name: hackathon
-      contact-points: localhost
+      schema-action: create_if_not_exists
+  application:
+    name: patientschedule
+  profiles:
+    active: local
+
