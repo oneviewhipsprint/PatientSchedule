@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Table("schedule")
-public class PatientClinicSchedule implements Serializable {
+public class Schedule implements Serializable {
 
     private static final long serialVersionUID = 6510847337568566730L;
 

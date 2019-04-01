@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface ClinicRepository extends CassandraRepository<Clinic, Integer> {
+
+    /***
     @AllowFiltering
     List<Clinic> findClinicsByClinicIdAndShiftDate(Integer id, String date);
+    ***/
 }

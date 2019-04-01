@@ -17,7 +17,9 @@ public class ScheduleService {
         this.clinicRepository = clinicRepository;
     }
 
+    /***
     public List<Clinic> getSchedules(ScheduleFilter filter) {
         return clinicRepository.findClinicsByClinicIdAndShiftDate(filter.getClinicId(), filter.getDate());
     }
+     ***/
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
@@ -17,6 +18,9 @@ import java.io.Serializable;
 @Table("chairshift")
 public class ChairShift implements Serializable {
     private static final long serialVersionUID = -8585751858732310391L;
+
+    @PrimaryKey
+    private Integer chairShiftId;
 
     private Integer chairId;
     private Integer shiftId;

@@ -20,9 +20,11 @@ public class ScheduleController {
         this.service = service;
     }
 
+    /***
     @GetMapping("/schedules")
     public List<Clinic> getSchedules(ScheduleFilter filter) {
         return service.getSchedules(filter);
     }
+    ***/
 
 }
