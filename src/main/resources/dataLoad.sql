@@ -7,10 +7,16 @@ insert into patient (patientid,firstname,lastname) values (6, 'John', 'Lennon');
 insert into patient (patientid,firstname,lastname) values (7, 'Freddy', 'Mercury');
 insert into patient (patientid,firstname,lastname) values (8, 'Bob', 'Marley');
 insert into patient (patientid,firstname,lastname) values (9, 'Stevie Ray', 'Vaughn');
-insert into clinic(clinicid,clinicName,chairid,shiftId,shiftName,shiftDate,shiftTime)
-    values(1, 'DenverWest', 1, 1, 'Morning', '04032019', '8am-12pm');
-insert into clinic(clinicid,clinicName,shiftId,shiftName,shiftDate,shiftTime)
-    values(1, 'DenverWest', 2, 1, 'Morning', '04032019', '8am-12pm');
+
+
+insert into clinic(clinicid,clinicName values(1, 'DenverWest');
+insert into chair (chairid, chairName) values(1, 'upstairs');
+insert into chair (chairid, chairName) values(2, 'downstairs');
+insert into chair (chairid, chairName) values(3, 'window seat');
+insert into shift(shiftId,shiftName,shiftDate,shiftTime) values(1, 'Morning', '04032019', '8am-12pm');
+insert into shift(shiftId,shiftName,shiftDate,shiftTime) values(2, 'Afternoon', '04032019', '12pm-4pm');
+insert into shift(shiftId,shiftName,shiftDate,shiftTime) values(3, 'Morning', '04032019', '8am-12pm');
+
 insert into clinic(clinicid,clinicName,shiftId,shiftName,shiftDate,shiftTime)
     values(1, 'DenverWest', 3, 1, 'Morning', '04032019', '8am-12pm');
 insert into clinic(clinicid,clinicName,chairid,shiftId,shiftName,shiftDate,shiftTime)

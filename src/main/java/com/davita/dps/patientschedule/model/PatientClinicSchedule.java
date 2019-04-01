@@ -27,5 +27,5 @@ public class PatientClinicSchedule implements Serializable {
     private Integer clinicId;
     private Integer chairId;
     private Integer shiftId;
-
+    private String shiftDate;
 }

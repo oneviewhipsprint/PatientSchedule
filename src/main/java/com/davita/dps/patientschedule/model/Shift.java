@@ -23,7 +23,6 @@ public class Shift implements Serializable {
     private Integer shiftId;
 
     private String shiftName;
-    private String shiftDate;
     private String shiftTime;
 
 }
