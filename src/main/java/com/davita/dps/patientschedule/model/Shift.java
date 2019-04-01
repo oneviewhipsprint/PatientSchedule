@@ -15,13 +15,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("clinic")
-public class Clinic implements Serializable  {
-    private static final long serialVersionUID = -6892927105708095940L;
+@Table("shift")
+public class Shift implements Serializable {
+    private static final long serialVersionUID = 8192115113640484462L;
 
     @PrimaryKey
-    private Integer clinicId;
+    private Integer shiftId;
 
-    private String clinicName;
+    private String shiftName;
+    private String shiftDate;
+    private String shiftTime;
 
 }

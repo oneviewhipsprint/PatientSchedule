@@ -1,0 +1,25 @@
+kafka setup:
+
+download kafka: https://www.apache.org/dyn/closer.cgi?path=/kafka/2.2.0/kafka_2.12-2.2.0.tgz
+double-click downloaded file to untar
+cd kafka_2.12-2.2.0
+start a single node zookeeper instance:
+    bin/zookeeper-server-start.sh config/zookeeper.properties&
+start kafka server:
+    bin/kafka-server-start.sh config/server.properties&
+create topics:
+    patient_schedule - these are scheduling events (book, cancel, etc) produced by mobile and consumed by MT.
+        bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic patient_schedule
+    patient_alert - these are alerts or notifications produced by MT and consumed by mobile.
+        bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic patient_alert
+verify topics:
+    bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+
+Listening to a topic (this is similar to tailing a log file, you will see messages as they are published to the topic):
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic patient_schedule
+
+
+Show all messages in a topic (after dumping all messages, it will continue to listen as above):
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic patient_schedule –-from-beginning
+
