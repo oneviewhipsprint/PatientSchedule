@@ -47,6 +47,8 @@ public class ScheduleService {
     }
 
     public WaitList addToWaitList(Integer patientId, WaitList waitList) {
+        waitList.setId(UUID.randomUUID());
+        waitList.setStatus("PENDING");
         return waitListRepository.insert(waitList);
     }
 

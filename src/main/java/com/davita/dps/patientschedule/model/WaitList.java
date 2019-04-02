@@ -10,6 +10,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -21,7 +22,7 @@ public class WaitList {
     private static final long serialVersionUID = 6510847337568566730L;
 
     @PrimaryKey
-    private Integer id;
+    private UUID id;
 
     private Integer patientId;
     private Date shiftDate;
