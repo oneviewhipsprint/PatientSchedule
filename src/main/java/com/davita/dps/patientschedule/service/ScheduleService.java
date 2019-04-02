@@ -15,14 +15,17 @@ public class ScheduleService {
     private PatientClinicScheduleRepository scheduleRepository;
     private WaitListRepository waitListRepository;
     private WaitListService waitListService;
+    private ReminderService reminderService;
 
     @Autowired
     public ScheduleService(PatientClinicScheduleRepository scheduleRepository,
                            WaitListRepository waitListRepository,
-                           WaitListService waitListService) {
+                           WaitListService waitListService,
+                           ReminderService reminderService) {
         this.scheduleRepository = scheduleRepository;
         this.waitListRepository = waitListRepository;
         this.waitListService = waitListService;
+        this.reminderService = reminderService;
     }
 
     public Schedule bookSchedule(Integer patientId, Schedule schedule) {
@@ -34,6 +37,9 @@ public class ScheduleService {
         } else {
             schedule.setScheduleId(UUID.randomUUID());
             savedSchedule = scheduleRepository.insert(schedule);
+
+            // send reminder after a minute
+            reminderService.sendReminder(savedSchedule);
         }
 
         return savedSchedule;

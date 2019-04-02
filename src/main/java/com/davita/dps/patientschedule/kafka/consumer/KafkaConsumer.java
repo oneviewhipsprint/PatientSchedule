@@ -50,7 +50,7 @@ public class KafkaConsumer {
         }
 
         // test save to db
-        psm.setId(UUID.randomUUID());
+        //psm.setId(UUID.randomUUID());
         repo.save(psm);
 
         log.info(String.format("#### -> Consumed message -> %s", jsonMessage));

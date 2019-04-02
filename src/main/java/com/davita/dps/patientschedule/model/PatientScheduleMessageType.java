@@ -13,6 +13,7 @@ public enum PatientScheduleMessageType {
     BOOKING_CONFIRMATION,
     CANCELLATION_CONFIRMATION,
     WAITLIST_CONFIRMATION,
+    REMINDER,
     WAITLIST;
 
     /** get the enum value for the given String */
