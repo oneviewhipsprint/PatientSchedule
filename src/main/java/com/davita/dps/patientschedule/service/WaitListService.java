@@ -28,13 +28,14 @@ public class WaitListService {
                 waitListRepository.getWaitListByClinicIdAndShiftDateAndShiftIdAndChairIdOrderByEnteredDateTime(
                     schedule.getClinicId(), schedule.getShiftDate(),schedule.getShiftId(), schedule.getChairId());
         if (!waitListers.isEmpty()) {
-            sendWaitListNotification(schedule);
+            sendWaitListNotification(schedule, waitListers.get(0));
         }
     }
 
-    public void sendWaitListNotification(Schedule schedule) {
+    public void sendWaitListNotification(Schedule schedule, WaitList waitLister) {
         PatientScheduleMessage message = PatientScheduleMessage.builder()
                 .messageType(PatientScheduleMessageType.WAITLIST.toString())
+                .patientId(waitLister.getPatientId())
                 .clinicId(schedule.getClinicId())
                 .shiftDate(schedule.getShiftDate())
                 .shiftId(schedule.getShiftId())
