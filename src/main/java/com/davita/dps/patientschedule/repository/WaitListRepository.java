@@ -5,7 +5,6 @@ import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,9 +12,8 @@ import java.util.UUID;
 public interface WaitListRepository extends CassandraRepository<WaitList, UUID> {
 
     @AllowFiltering
-    List<WaitList> getWaitListByClinicIdAndShiftDateAndShiftIdAndChairId(
-            Integer clinicId, String shiftDate, Integer shiftId, Integer chairId);
-
+    List<WaitList> getWaitListByClinicIdAndShiftDateAndShiftIdAndChairIdAndStatus(
+            Integer clinicId, String shiftDate, Integer shiftId, Integer chairId, String status);
 
 }
 

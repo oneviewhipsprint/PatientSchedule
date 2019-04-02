@@ -2,6 +2,7 @@ package com.davita.dps.patientschedule.service;
 
 import com.davita.dps.patientschedule.model.Schedule;
 import com.davita.dps.patientschedule.model.WaitList;
+import com.davita.dps.patientschedule.model.WaitListStatusType;
 import com.davita.dps.patientschedule.repository.PatientClinicScheduleRepository;
 import com.davita.dps.patientschedule.repository.WaitListRepository;
 import org.springframework.beans.factory.annotation.Autowired;

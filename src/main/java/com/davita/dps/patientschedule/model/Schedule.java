@@ -9,7 +9,6 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 @Setter
@@ -30,4 +29,5 @@ public class Schedule implements Serializable {
     private Integer chairId;
     private Integer shiftId;
     private String shiftDate;
+    private boolean reminderSent;
 }

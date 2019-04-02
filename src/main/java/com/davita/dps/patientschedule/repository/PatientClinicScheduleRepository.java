@@ -3,11 +3,8 @@ package com.davita.dps.patientschedule.repository;
 import com.davita.dps.patientschedule.model.Schedule;
 import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,4 +19,6 @@ public interface PatientClinicScheduleRepository extends CassandraRepository<Sch
                                                                       String shiftDate,
                                                                       Integer chairId,
                                                                       Integer shiftId);
+    @AllowFiltering
+    List<Schedule> findAllByReminderSent(boolean reminderSent);
 }
