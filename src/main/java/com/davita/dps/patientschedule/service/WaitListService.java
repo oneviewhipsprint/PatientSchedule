@@ -9,6 +9,7 @@ import com.davita.dps.patientschedule.model.WaitListStatusType;
 import com.davita.dps.patientschedule.repository.PatientClinicScheduleRepository;
 import com.davita.dps.patientschedule.repository.WaitListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,8 @@ public class WaitListService {
     private KafkaProducer kafkaProducer;
     private PatientClinicScheduleRepository scheduleRepository;
 
-    public WaitListService(WaitListRepository waitListRepository,
-                           KafkaProducer kafkaProducer,
-                           PatientClinicScheduleRepository scheduleRepository) {
+    @Autowired
+    public WaitListService(WaitListRepository waitListRepository, KafkaProducer kafkaProducer, PatientClinicScheduleRepository scheduleRepository) {
         this.waitListRepository = waitListRepository;
         this.kafkaProducer = kafkaProducer;
         this.scheduleRepository = scheduleRepository;
@@ -101,5 +101,32 @@ public class WaitListService {
             return sortedList.get(0);
         }
         return null;
+    }
+
+    public WaitList addToWaitList(Integer patientId, WaitList waitList) throws RuntimeException {
+        WaitList savedWaitList = null;
+        Optional<Schedule> optionalSchedule = scheduleRepository.findByClinicIdAndShiftDateAndChairIdAndShiftId(waitList.getClinicId(),
+                waitList.getShiftDate(), waitList.getChairId(), waitList.getShiftId());
+
+        if (optionalSchedule.isPresent()) {
+
+            Optional<WaitList> optionalWaitList = waitListRepository.findByPatientIdAndShiftDateAndClinicIdAndShiftId(waitList.getPatientId(), waitList.getShiftDate(), waitList.getClinicId(), waitList.getShiftId());
+
+            if (optionalWaitList.isPresent()) {
+                throw new RuntimeException("Patient is already added to waitList");
+            } else {
+                waitList.setId(UUID.randomUUID());
+                waitList.setStatus("PENDING");
+                savedWaitList = waitListRepository.insert(waitList);
+            }
+        } else {
+            throw new RuntimeException("No schedule exists for this clinic/shift/chair");
+        }
+
+        return savedWaitList;
+    }
+
+    public List<WaitList> getWaitLists(Integer patientId, String date) {
+        return waitListRepository.findAllByPatientIdAndShiftDate(patientId, date);
     }
 }
