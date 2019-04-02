@@ -43,13 +43,14 @@ public class WaitListService {
 
     public void sendWaitListNotification(Schedule schedule, WaitList waitLister) {
         PatientScheduleMessage message = PatientScheduleMessage.builder()
-                .id(UUID.randomUUID())
                 .messageType(PatientScheduleMessageType.WAITLIST.toString())
                 .patientId(waitLister.getPatientId())
                 .clinicId(schedule.getClinicId())
                 .shiftDate(schedule.getShiftDate())
                 .shiftId(schedule.getShiftId())
-                .chairId(schedule.getChairId()).build();
+                .chairId(schedule.getChairId())
+                .text("Your waiting list slot is available, please book - ")
+                .build();
 
         ObjectMapper jsonObjectMapper = new ObjectMapper();
         String json = null;
