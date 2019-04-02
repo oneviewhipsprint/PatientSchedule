@@ -21,5 +21,5 @@ public interface PatientClinicScheduleRepository extends CassandraRepository<Sch
                                                                       Integer shiftId);
 
     @AllowFiltering
-    List<Schedule>  findAllByReminderSent(boolean reminderSent);
+    List<Schedule> findAllByReminderSent(boolean reminderSent);
 }

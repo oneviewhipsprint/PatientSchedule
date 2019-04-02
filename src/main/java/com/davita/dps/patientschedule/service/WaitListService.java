@@ -69,7 +69,7 @@ public class WaitListService {
         }
     }
 
-    public void sendWaitListNotification(Schedule schedule, WaitList waitLister) {
+    private void sendWaitListNotification(Schedule schedule, WaitList waitLister) {
         PatientScheduleMessage message = PatientScheduleMessage.builder()
                 .messageType(PatientScheduleMessageType.WAITLIST.toString())
                 .patientId(waitLister.getPatientId())
@@ -87,6 +87,21 @@ public class WaitListService {
         kafkaProducer.sendMessage(json);
     }
 
+    private WaitList getNextPendingWaitlister(Schedule schedule) {
+        List<WaitList> waitListers =
+                waitListRepository.getWaitListByClinicIdAndShiftDateAndShiftIdAndChairIdAndStatus(
+                        schedule.getClinicId(),
+                        schedule.getShiftDate(),
+                        schedule.getShiftId(),
+                        schedule.getChairId(),
+                        WaitListStatusType.PENDING.toString());
+        if (!waitListers.isEmpty()) {
+            List<WaitList> sortedList = waitListers.stream().sorted(Comparator.comparing((WaitList::getEnteredDateTime))).collect(Collectors.toList());
+            // always return first one in list
+            return sortedList.get(0);
+        }
+        return null;
+    }
 
     public WaitList addToWaitList(Integer patientId, WaitList waitList) throws RuntimeException {
         WaitList savedWaitList = null;
@@ -115,19 +130,4 @@ public class WaitListService {
         return waitListRepository.findAllByPatientIdAndShiftDate(patientId, date);
     }
 
-    private WaitList getNextPendingWaitlister(Schedule schedule) {
-        List<WaitList> waitListers =
-                waitListRepository.findAllByClinicIdAndShiftDateAndShiftIdAndChairIdAndStatus(
-                        schedule.getClinicId(),
-                        schedule.getShiftDate(),
-                        schedule.getShiftId(),
-                        schedule.getChairId(),
-                        WaitListStatusType.PENDING.toString());
-        if (!waitListers.isEmpty()) {
-            List<WaitList> sortedList = waitListers.stream().sorted(Comparator.comparing((WaitList::getEnteredDateTime))).collect(Collectors.toList());
-            // always return first one in list
-            return sortedList.get(0);
-        }
-        return null;
-    }
 }

@@ -37,7 +37,7 @@ public class KafkaConsumer {
         if (messageType == null) {
             String errorMsg = "Received invalid message type [" + psm.getMessageType() + "]. " +
             "JSON Message was [" + jsonMessage + "].";
-            log.error(errorMsg);
+            //log.error(errorMsg);
             throw new Exception(errorMsg);
         }
 
@@ -53,6 +53,6 @@ public class KafkaConsumer {
         //psm.setId(UUID.randomUUID());
         repo.save(psm);
 
-        log.info(String.format("#### -> Consumed message -> %s", jsonMessage));
+        //log.info(String.format("#### -> Consumed message -> %s", jsonMessage));
     }
 }

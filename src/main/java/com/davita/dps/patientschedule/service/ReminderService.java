@@ -27,8 +27,9 @@ public class ReminderService {
     @Async
     public void sendReminder(Schedule schedule) {
         // sleep for the interval
-        try { Thread.sleep(REMINDER_INTERVAL_MILLIS); }
-        catch (InterruptedException ie) { }
+        try {
+            Thread.sleep(REMINDER_INTERVAL_MILLIS);
+        } catch (InterruptedException ie) {}
 
         PatientScheduleMessage message = PatientScheduleMessage.builder()
                 .messageType(PatientScheduleMessageType.REMINDER.toString())
@@ -42,8 +43,12 @@ public class ReminderService {
         String json = null;
         try {
             json = jsonObjectMapper.writeValueAsString(message);
-        } catch (Exception e) {}
+        } catch (Exception e) { }
 
         kafkaProducer.sendMessage(json);
+
+        // update reminderSent flag in schedule
+        schedule.setReminderSent(true);
+        scheduleRepository.save(schedule);
     }
 }

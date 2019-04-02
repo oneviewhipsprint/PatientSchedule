@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface WaitListRepository extends CassandraRepository<WaitList, UUID> {
 
     @AllowFiltering
-    List<WaitList> getWaitListByClinicIdAndShiftDateAndShiftIdAndChairId(
-            Integer clinicId, String shiftDate, Integer shiftId, Integer chairId);
+    List<WaitList> getWaitListByClinicIdAndShiftDateAndShiftIdAndChairIdAndStatus(
+            Integer clinicId, String shiftDate, Integer shiftId, Integer chairId, String status);
 
     @AllowFiltering
     List<WaitList> findAllByPatientIdAndShiftDate(Integer patientId, String date);
