@@ -9,8 +9,11 @@ import com.davita.dps.patientschedule.repository.WaitListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class WaitListService {
@@ -26,10 +29,11 @@ public class WaitListService {
 
     public void notifyWaitListers(Schedule schedule) {
         List<WaitList> waitListers =
-                waitListRepository.getWaitListByClinicIdAndShiftDateAndShiftIdAndChairIdOrderByEnteredDateTime(
+                waitListRepository.getWaitListByClinicIdAndShiftDateAndShiftIdAndChairId(
                     schedule.getClinicId(), schedule.getShiftDate(),schedule.getShiftId(), schedule.getChairId());
         if (!waitListers.isEmpty()) {
-            sendWaitListNotification(schedule, waitListers.get(0));
+            List<WaitList> sortedList = waitListers.stream().sorted(Comparator.comparing((WaitList::getEnteredDateTime))).collect(Collectors.toList());
+            sendWaitListNotification(schedule, sortedList.get(0));
         }
     }
 

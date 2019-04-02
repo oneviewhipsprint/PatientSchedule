@@ -9,7 +9,6 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Setter
@@ -25,10 +24,16 @@ public class WaitList {
     private UUID id;
 
     private Integer patientId;
-    private Date shiftDate;
+
+    private String shiftDate;
+
     private Integer clinicId;
+
     private Integer chairId;
+
     private Integer shiftId;
+
     private String status; //pending, notified
+
     private LocalDateTime enteredDateTime = LocalDateTime.now();
 }

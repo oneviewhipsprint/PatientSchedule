@@ -7,6 +7,7 @@ import com.davita.dps.patientschedule.repository.WaitListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class ScheduleService {
         return patientClinicScheduleRepository.insert(schedule);
     }
 
-    public void cancelSchedule(Integer patientId, Integer scheduleId) throws RuntimeException {
+    public void cancelSchedule(Integer patientId, UUID scheduleId) throws RuntimeException {
         Optional<Schedule> optionalSchedule = patientClinicScheduleRepository.findById(scheduleId);
         if (optionalSchedule.isPresent()) {
             Schedule schedule = optionalSchedule.get();
@@ -46,13 +47,23 @@ public class ScheduleService {
         }
     }
 
-    public WaitList addToWaitList(Integer patientId, WaitList waitList) {
-        waitList.setId(UUID.randomUUID());
-        waitList.setStatus("PENDING");
-        return waitListRepository.insert(waitList);
+    public WaitList addToWaitList(Integer patientId, WaitList waitList) throws RuntimeException {
+        WaitList savedWaitList = null;
+        Optional<Schedule> optionalSchedule = patientClinicScheduleRepository.findByClinicIdAndShiftDateAndChairIdAndShiftId(waitList.getClinicId(),
+                waitList.getShiftDate(), waitList.getChairId(), waitList.getShiftId());
+
+        if (optionalSchedule.isPresent()) {
+            waitList.setId(UUID.randomUUID());
+            waitList.setStatus("PENDING");
+            savedWaitList = waitListRepository.insert(waitList);
+        } else {
+            throw new RuntimeException("No schedule exists for this clinic/shift/chair");
+        }
+
+        return savedWaitList;
     }
 
-    public Schedule reschduleSchdeule(Integer patientId, Integer scheduleId, Schedule schedule) {
+    public Schedule reschduleSchdeule(Integer patientId, UUID scheduleId, Schedule schedule) {
         cancelSchedule(patientId, scheduleId);
         return bookSchedule(patientId, schedule);
     }
@@ -60,10 +71,4 @@ public class ScheduleService {
     public List<Schedule> getSchedules(String date) {
         return patientClinicScheduleRepository.findAllByShiftDate(date);
     }
-
-    /***
-    public List<Clinic> getSchedules(ScheduleFilter filter) {
-        return clinicRepository.findClinicsByClinicIdAndShiftDate(filter.getClinicId(), filter.getDate());
-    }
-     ***/
 }

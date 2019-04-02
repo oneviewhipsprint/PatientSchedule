@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1")
@@ -37,13 +41,13 @@ public class ScheduleController {
     }
 
     @PostMapping("/patients/{patientId}/schedules/{scheduleId}")
-    public void cancelSchedule(@PathVariable Integer patientId, @PathVariable Integer scheduleId) {
+    public void cancelSchedule(@PathVariable Integer patientId, @PathVariable UUID scheduleId) {
         service.cancelSchedule(patientId, scheduleId);
     }
 
     @PostMapping("/patients/{patientId}/reschedules/{scheduleId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Schedule rescheduleSchedule(@PathVariable Integer patientId, @PathVariable Integer scheduleId, @RequestBody Schedule schedule) {
+    public Schedule rescheduleSchedule(@PathVariable Integer patientId, @PathVariable UUID scheduleId, @RequestBody Schedule schedule) {
         return service.reschduleSchdeule(patientId, scheduleId, schedule);
     }
 

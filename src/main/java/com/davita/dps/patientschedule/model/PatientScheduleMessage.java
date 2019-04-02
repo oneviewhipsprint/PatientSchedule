@@ -29,5 +29,5 @@ public class PatientScheduleMessage implements Serializable {
     private Integer clinicId;
     private Integer chairId;
     private Integer shiftId;
-    private Date shiftDate;
+    private String shiftDate;
 }
