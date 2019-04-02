@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WaitListService {
@@ -34,6 +35,7 @@ public class WaitListService {
 
     public void sendWaitListNotification(Schedule schedule, WaitList waitLister) {
         PatientScheduleMessage message = PatientScheduleMessage.builder()
+                .id(UUID.randomUUID())
                 .messageType(PatientScheduleMessageType.WAITLIST.toString())
                 .patientId(waitLister.getPatientId())
                 .clinicId(schedule.getClinicId())

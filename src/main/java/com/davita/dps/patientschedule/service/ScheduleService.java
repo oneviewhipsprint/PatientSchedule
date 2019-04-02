@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ScheduleService {
@@ -26,6 +27,7 @@ public class ScheduleService {
     }
 
     public Schedule bookSchedule(Integer patientId, Schedule schedule) {
+        schedule.setScheduleId(UUID.randomUUID());
         return patientClinicScheduleRepository.insert(schedule);
     }
 
