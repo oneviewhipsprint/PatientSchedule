@@ -1,7 +1,5 @@
 package com.davita.dps.patientschedule.controller;
 
-import com.davita.dps.patientschedule.filter.ScheduleFilter;
-import com.davita.dps.patientschedule.model.Clinic;
 import com.davita.dps.patientschedule.model.Schedule;
 import com.davita.dps.patientschedule.model.WaitList;
 import com.davita.dps.patientschedule.service.ScheduleService;
@@ -50,8 +48,9 @@ public class ScheduleController {
     }
 
     @PostMapping("/patients/{patientId}/waitList")
-    public void addToWaitList(@PathVariable Integer patientId, @RequestBody WaitList waitList) {
-        service.addToWaitList(patientId, waitList);
+    @ResponseStatus(HttpStatus.CREATED)
+    public WaitList addToWaitList(@PathVariable Integer patientId, @RequestBody WaitList waitList) {
+        return service.addToWaitList(patientId, waitList);
     }
 
 }
