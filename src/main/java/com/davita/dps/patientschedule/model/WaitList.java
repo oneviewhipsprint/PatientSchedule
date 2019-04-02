@@ -9,6 +9,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Setter
 @Getter
@@ -23,7 +24,7 @@ public class WaitList {
     private Integer id;
 
     private Integer patientId;
-    private String shiftDate;
+    private Date shiftDate;
     private Integer clinicId;
     private Integer chairId;
     private Integer shiftId;

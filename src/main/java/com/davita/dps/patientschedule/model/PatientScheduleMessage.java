@@ -9,6 +9,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -24,8 +25,9 @@ public class PatientScheduleMessage implements Serializable {
     private UUID id;
 
     private String messageType;
-    private String patientId;
-    private String clinicId;
-    private int chairId;
-    private int shiftId;
+    private Integer patientId;
+    private Integer clinicId;
+    private Integer chairId;
+    private Integer shiftId;
+    private Date shiftDate;
 }

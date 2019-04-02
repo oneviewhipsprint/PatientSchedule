@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class KafkaProducer {
-    //private static final String TOPIC = "patient_alert";
-    private static final String TOPIC = "patient_schedule";
+    private static final String TOPIC = "patient_alert";
 
     @Autowired
     // Intellij says: "Could not autowire. No beans of KafkaTemplate..."

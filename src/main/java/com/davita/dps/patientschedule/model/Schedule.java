@@ -9,6 +9,8 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -21,11 +23,11 @@ public class Schedule implements Serializable {
     private static final long serialVersionUID = 6510847337568566730L;
 
     @PrimaryKey
-    private Integer scheduleId;
+    private UUID scheduleId;
 
     private Integer patientId;
     private Integer clinicId;
     private Integer chairId;
     private Integer shiftId;
-    private String shiftDate;
+    private Date shiftDate;
 }

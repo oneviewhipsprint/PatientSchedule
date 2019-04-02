@@ -9,19 +9,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ScheduleService {
     private ClinicRepository clinicRepository;
     private PatientClinicScheduleRepository patientClinicScheduleRepository;
+    private WaitListService waitListService;
 
     @Autowired
-    public ScheduleService(ClinicRepository clinicRepository, PatientClinicScheduleRepository patientClinicScheduleRepository) {
+    public ScheduleService(ClinicRepository clinicRepository,
+                           PatientClinicScheduleRepository patientClinicScheduleRepository,
+                           WaitListService waitListService) {
         this.clinicRepository = clinicRepository;
         this.patientClinicScheduleRepository = patientClinicScheduleRepository;
+        this.waitListService = waitListService;
     }
 
     public Schedule bookSchedule(Integer patientId, Schedule schedule) {
+        schedule.setScheduleId(UUID.randomUUID());
         return patientClinicScheduleRepository.insert(schedule);
     }
 
@@ -31,6 +37,7 @@ public class ScheduleService {
             Schedule schedule = optionalSchedule.get();
             if (schedule.getPatientId().equals(patientId)) {
                 patientClinicScheduleRepository.delete(optionalSchedule.get());
+                waitListService.notifyWaitListers(schedule);
             } else {
                 throw new RuntimeException("Schedule does not exist for this patient");
             }
