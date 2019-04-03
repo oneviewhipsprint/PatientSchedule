@@ -17,8 +17,9 @@ public interface WaitListRepository extends CassandraRepository<WaitList, UUID> 
             Integer clinicId, String shiftDate, Integer shiftId, Integer chairId, String status);
 
     @AllowFiltering
-    List<WaitList> findAllByPatientIdAndShiftDate(Integer patientId, String date);
+    List<WaitList> findAllByPatientIdAndShiftDateAndStatus(Integer patientId, String date, String status);
 
+    @AllowFiltering
     Optional<WaitList> findByPatientIdAndShiftDateAndClinicIdAndShiftId(Integer patientId, String shiftDate, Integer clinicId, Integer shiftId);
 
     @AllowFiltering

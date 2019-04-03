@@ -37,7 +37,9 @@ public class ReminderService {
                 .clinicId(schedule.getClinicId())
                 .shiftDate(schedule.getShiftDate())
                 .shiftId(schedule.getShiftId())
-                .chairId(schedule.getChairId()).build();
+                .chairId(schedule.getChairId())
+                .text("Reminder - your appointment is due on ")
+                .build();
 
         ObjectMapper jsonObjectMapper = new ObjectMapper();
         String json = null;

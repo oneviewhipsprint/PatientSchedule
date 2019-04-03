@@ -76,7 +76,9 @@ public class WaitListService {
                 .clinicId(schedule.getClinicId())
                 .shiftDate(schedule.getShiftDate())
                 .shiftId(schedule.getShiftId())
-                .chairId(schedule.getChairId()).build();
+                .chairId(schedule.getChairId())
+                .text("Your waiting list slot is available, please book ")
+                .build();
 
         ObjectMapper jsonObjectMapper = new ObjectMapper();
         String json = null;
@@ -127,7 +129,7 @@ public class WaitListService {
     }
 
     public List<WaitList> getWaitLists(Integer patientId, String date) {
-        return waitListRepository.findAllByPatientIdAndShiftDate(patientId, date);
+        return waitListRepository.findAllByPatientIdAndShiftDateAndStatus(patientId, date, "PENDING");
     }
 
 }
