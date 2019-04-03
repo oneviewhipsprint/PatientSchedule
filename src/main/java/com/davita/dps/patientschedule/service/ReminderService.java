@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class ReminderService {
 
     // how often we check to see if it's time to send reminders
-    private static final int REMINDER_INTERVAL_MILLIS = 60 * 1000;  // 1 minute
+    private static final int REMINDER_INTERVAL_MILLIS = 30 * 1000;  // 30 seconds
 
     private KafkaProducer kafkaProducer;
     private PatientClinicScheduleRepository scheduleRepository;
